@@ -1,0 +1,53 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.tenthpin.demo",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "6.1.2",
+    "applicationType": "monolith",
+    "baseName": "vueDemo",
+    "packageName": "com.tenthpin.demo",
+    "packageFolder": "com/tenthpin/demo",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "OTEzYjc3NTk2OGMxYWJkYTM4ZThlOTAxMzQzMjFiMzE2ODczODhiNGM5ZTJjMzliZWFlOWZhZTRhZTA3M2EwYWYyYTA3YzlmM2UyNGI1ZmI3MTUzYTk3MTE4NDMxZDY1NTUzYWI1NTcyZGNlMjcyMWEwMWZmNzkxZjdmN2NmZjc=",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-vuejs",
+        "version": "1.1.0"
+      }
+    ],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "zh-cn",
+    "languages": ["zh-cn"],
+    "blueprint": "generator-jhipster-vuejs",
+    "blueprintVersion": "1.1.0"
+  },
+  "generator-jhipster-vuejs": {
+    "jhipsterVersion": "6.1.2",
+    "applicationType": "monolith",
+    "baseName": "vueDemo",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "vue",
+    "clientTheme": "none",
+    "clientThemeVariant": ""
+  }
+}
