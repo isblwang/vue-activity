@@ -1,11 +1,22 @@
 {
-  "logs": {
-    "title": "日志",
-    "nbloggers": "共有 {{ total }} 条日志.",
-    "filter": "筛选",
-    "table": {
-      "name": "名称",
-      "level": "等级"
-    }
+  "bpmeditor": {
+    "home": {
+      "title": "流程",
+      "createLabel": "创建流程",
+      "createOrEditLabel": "创建或编辑流程"
+    },
+    "created": "流程 {{ param }} 创建成功",
+    "updated": "流程 {{ param }} 更新成功",
+    "deleted": "流程 {{ param }} 删除成功",
+    "delete": {
+      "question": "你确定要删除流程 {{ login }} ?"
+    },
+    "detail": {
+      "title": "流程"
+    },
+    "id": "模型编号",
+    "version": "版本",
+    "name": "模型名称",
+    "key": "模型key"
   }
 }

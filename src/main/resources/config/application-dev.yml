@@ -29,7 +29,7 @@ spring:
   devtools:
     restart:
       enabled: true
-      additional-exclude: .h2.server.properties
+#      additional-exclude: .h2.server.properties
     livereload:
       enabled: false # we use Webpack dev server + BrowserSync for livereload
   jackson:
@@ -37,9 +37,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/vuedemo;DB_CLOSE_DELAY=-1
-    username: vueDemo
-    password:
+    url: jdbc:mysql://39.108.58.58:3306/activiti6?useUnicode=true&useSSL=false&characterEncoding=utf8
+    username: root
+    password: 123456
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -47,8 +47,8 @@ spring:
     console:
       enabled: false
   jpa:
-    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-    database: H2
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: MYSQL
     show-sql: true
     properties:
       hibernate.id.new_generator_mappings: true
@@ -68,7 +68,9 @@ spring:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
     cache: false
-
+  activiti:
+    check-process-definitions: false
+    database-schema-update: true
 server:
   port: 8080
 

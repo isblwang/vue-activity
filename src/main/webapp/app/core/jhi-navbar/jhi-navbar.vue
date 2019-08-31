@@ -70,6 +70,10 @@
                         <font-awesome-icon icon="hdd" />
                         <span v-text="$t('global.menu.admin.database')">Database</span>
                     </b-dropdown-item>
+                    <b-dropdown-item to="/admin/bpmeditor">
+                        <font-awesome-icon icon="heart" />
+                        <span>工作流</span>
+                    </b-dropdown-item>
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown id="languagesnavBarDropdown" right v-if="languages && Object.keys(languages).length > 1">
                     <span slot="button-content">

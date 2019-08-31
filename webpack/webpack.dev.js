@@ -32,6 +32,7 @@ module.exports = merge(baseWebpackConfig, {
   devServer: {
     contentBase: './target/classes/static/',
     port: 9060,
+    hot: true,
     proxy: [
       {
         context: ['/api', '/services', '/management', '/swagger-resources', '/v2/api-docs', '/h2-console', '/auth'],

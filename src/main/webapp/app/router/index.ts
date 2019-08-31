@@ -23,6 +23,8 @@ const JhiHealthComponent = () => import('../admin/health/health.vue');
 const JhiLogsComponent = () => import('../admin/logs/logs.vue');
 const JhiAuditsComponent = () => import('../admin/audits/audits.vue');
 const JhiMetricsComponent = () => import('../admin/metrics/metrics.vue');
+const JhiBpmeditorComponent = () => import('../admin/bpmeditor/bpmeditor.vue');
+const JhiBpmComponent = () => import('../admin/bpmeditor/bpmeditor.vue');
 /* tslint:disable */
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
@@ -139,6 +141,18 @@ export default new Router({
       path: '/admin/jhi-configuration',
       name: 'JhiConfigurationComponent',
       component: JhiConfigurationComponent,
+      meta: { authorities: ['ROLE_ADMIN'] }
+    },
+    {
+      path: '/admin/bpmeditor',
+      name: 'JhiBpmeditorComponent',
+      component: JhiBpmeditorComponent,
+      meta: { authorities: ['ROLE_ADMIN'] }
+    },
+    {
+      path: '/admin/bpmeditor/new',
+      name: 'JhiBpmCreate',
+      component: JhiBpmComponent,
       meta: { authorities: ['ROLE_ADMIN'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

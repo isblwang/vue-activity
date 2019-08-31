@@ -22,6 +22,7 @@ import '../content/scss/vendor.scss';
 import AlertService from '@/shared/alert/alert.service';
 import TranslationService from '@/locale/translation.service';
 import ConfigurationService from '@/admin/configuration/configuration.service';
+import BpmeditorService from '@/admin/bpmeditor/bpmeditor.service';
 
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
@@ -75,6 +76,7 @@ new Vue({
 
     configurationService: () => new ConfigurationService(),
     logsService: () => new LogsService(),
+    bpmService: () => new BpmeditorService(),
     metricsService: () => new MetricsService(),
     alertService: () => alertService,
     translationService: () => translationService,

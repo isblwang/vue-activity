@@ -1,47 +1,99 @@
-import { Component, Vue, Inject } from 'vue-property-decorator';
-
-import LogsService from './logs.service';
+import { Component, Inject, Vue } from 'vue-property-decorator';
+import UserManagementService, { default as BpmeditorService } from './bpmeditor.service';
+import AlertService from '@/shared/alert/alert.service';
 
 @Component
-export default class JhiLogs extends Vue {
-  @Inject('logsService') private logsService: () => LogsService;
-  private loggers: any[] = [];
-  public filtered = '';
-  public orderProp = 'name';
+export default class JhiBpmComponent extends Vue {
+  @Inject('alertService') private alertService: () => AlertService;
+  @Inject('bpmService') private bpmService: () => BpmeditorService;
+  public error = '';
+  public success = '';
+  public bpms: any[] = [];
+  public itemsPerPage = 20;
+  public queryCount: number = null;
+  public page = 1;
+  public previousPage: number = null;
+  public propOrder = 'id';
   public reverse = false;
+  public totalItems = 0;
+  public removeId: number = null;
+
+  public dismissCountDown: number = this.$store.getters.dismissCountDown;
+  public dismissSecs: number = this.$store.getters.dismissSecs;
+  public alertType: string = this.$store.getters.alertType;
+  public alertMessage: any = this.$store.getters.alertMessage;
+
+  public getAlertFromStore() {
+    this.dismissCountDown = this.$store.getters.dismissCountDown;
+    this.dismissSecs = this.$store.getters.dismissSecs;
+    this.alertType = this.$store.getters.alertType;
+    this.alertMessage = this.$store.getters.alertMessage;
+  }
+
+  public countDownChanged(dismissCountDown: number) {
+    this.alertService().countDownChanged(dismissCountDown);
+    this.getAlertFromStore();
+  }
 
   public mounted(): void {
-    this.init();
+    this.loadAll();
   }
 
-  public init(): void {
-    this.logsService()
-      .findAll()
-      .then(response => {
-        this.extractLoggers(response);
+  public loadAll(): void {
+    this.bpmService()
+      .retrieve({
+        page: this.page - 1,
+        size: this.itemsPerPage,
+        sort: this.sort()
+      })
+      .then(res => {
+        this.bpms = res.data;
+        this.totalItems = Number(res.headers['x-total-count']);
+        this.queryCount = this.totalItems;
       });
   }
 
-  public updateLevel(name, level): void {
-    this.logsService()
-      .changeLevel(name, level)
-      .then(() => {
-        this.init();
-      });
+  public sort(): any {
+    const result = [this.propOrder + ',' + (this.reverse ? 'asc' : 'desc')];
+    if (this.propOrder !== 'id') {
+      result.push('id');
+    }
+    return result;
   }
 
-  public changeOrder(orderProp): void {
-    this.orderProp = orderProp;
+  public loadPage(page: number): void {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.transition();
+    }
+  }
+
+  public transition(): void {
+    this.loadAll();
+  }
+
+  public changeOrder(propOrder: string): void {
+    this.propOrder = propOrder;
     this.reverse = !this.reverse;
   }
 
-  private extractLoggers(response) {
-    this.loggers = [];
-    if (response.data) {
-      for (const key of Object.keys(response.data.loggers)) {
-        const logger = response.data.loggers[key];
-        this.loggers.push({ name: key, level: logger.effectiveLevel });
-      }
-    }
+  public deleteUser(): void {
+    this.bpmService()
+      .remove(this.removeId)
+      .then(res => {
+        const message = this.$t(res.headers['x-vuedemoapp-alert'], { param: res.headers['x-vuedemoapp-params'] });
+        this.alertService().showAlert(message, 'danger');
+        this.getAlertFromStore();
+        this.removeId = null;
+        this.loadAll();
+      });
+  }
+
+  public prepareRemove(instance): void {
+    this.removeId = instance.login;
+  }
+
+  public get username(): string {
+    return this.$store.getters.account ? this.$store.getters.account.login : '';
   }
 }

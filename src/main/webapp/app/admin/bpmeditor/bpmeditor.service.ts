@@ -1,14 +1,15 @@
 import axios, { AxiosPromise } from 'axios';
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import buildPaginationQueryOpts from '@/shared/sort/sorts';
 
 @Component
-export default class LogsService extends Vue {
-  public changeLevel(name: string, configuredLevel: string): AxiosPromise<any> {
-    return axios.post('management/loggers/' + name, { configuredLevel });
+export default class BpmeditorService extends Vue {
+  public retrieve(req?: any): Promise<any> {
+    return axios.get(`api/bpm/bpms?${buildPaginationQueryOpts(req)}`);
   }
 
-  public findAll(): AxiosPromise<any> {
-    return axios.get('management/loggers');
+  public remove(modelId: number): Promise<any> {
+    return axios.delete(`api/bpm/bpms/${modelId}`);
   }
 }

@@ -3,9 +3,6 @@ package com.tenthpin.demo.web.rest;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.tenthpin.demo.security.AuthoritiesConstants;
-import com.tenthpin.demo.service.dto.UserDTO;
-import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
@@ -26,15 +23,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,9 +36,9 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/bpm")
-public class BpmRController {
+public class BpmController {
 
-    private final Logger logger = LoggerFactory.getLogger(BpmRController.class);
+    private final Logger logger = LoggerFactory.getLogger(BpmController.class);
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
